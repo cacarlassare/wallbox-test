@@ -29,9 +29,32 @@
 		B25961492D750D3400DA4F81 /* wallbox-testUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "wallbox-testUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		B25961A02D7689E200DA4F81 /* Exceptions for "wallbox-test" folder in "wallbox-testTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Support Files/historic_data.json",
+				"Support Files/live_data.json",
+			);
+			target = B259613E2D750D3400DA4F81 /* wallbox-testTests */;
+		};
+		B25961A12D7689E200DA4F81 /* Exceptions for "wallbox-test" folder in "wallbox-testUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Support Files/historic_data.json",
+				"Support Files/live_data.json",
+			);
+			target = B25961482D750D3400DA4F81 /* wallbox-testUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		B25961312D750D3100DA4F81 /* wallbox-test */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				B25961A02D7689E200DA4F81 /* Exceptions for "wallbox-test" folder in "wallbox-testTests" target */,
+				B25961A12D7689E200DA4F81 /* Exceptions for "wallbox-test" folder in "wallbox-testUITests" target */,
+			);
 			path = "wallbox-test";
 			sourceTree = "<group>";
 		};
