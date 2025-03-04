@@ -5,27 +5,29 @@
 //  Created by Cristian Carlassare on 02/03/2025.
 //
 
+// DashboardView.swift
 import SwiftUI
 
 struct DashboardView: View {
     @StateObject var viewModel: DashboardViewModel
     
     var body: some View {
+        
         NavigationView {
             ScrollView {
-                
-                if viewModel.isLoading {
-                    ProgressView("Loading...")
-                        .padding()
+
+                LazyVStack(alignment: .center, spacing: 20) {
                     
-                } else if let errorMessage = viewModel.errorMessage {
-                    Text("Error: \(errorMessage)")
-                        .foregroundColor(.red)
-                        .padding()
-                    
-                } else {
-                    
-                    LazyVStack(alignment: .center) {
+                    if viewModel.isLoading {
+                        ProgressView("Loading...")
+                            .padding()
+                    } else if let errorMessage = viewModel.errorMessage {
+                        
+                        // Dedicated error view with a retry button
+                        ErrorView(errorMessage: errorMessage) {
+                            viewModel.loadData()
+                        }
+                    } else {
                         
                         // Live Data Widget
                         widgetCard {
@@ -83,7 +85,7 @@ struct DashboardView: View {
                             }
                         }
                         
-                        // Statistics Widget (navigates to the Detail screen)
+                        // Statistics Widget (navigates to the ReportDetailView)
                         NavigationLink(destination: ReportDetailView()) {
                             widgetCard {
                                 VStack(alignment: .center, spacing: 8) {
@@ -105,8 +107,11 @@ struct DashboardView: View {
                             }
                         }
                     }
-                    .padding()
                 }
+                .padding()
+            }
+            .refreshable {
+                viewModel.loadData()
             }
             .navigationTitle("Dashboard")
             .navigationBarTitleDisplayMode(.inline)
@@ -125,5 +130,24 @@ struct DashboardView: View {
             .background(Color(.systemCyan).opacity(0.1))
             .cornerRadius(12)
             .shadow(color: Color.black.opacity(0.2), radius: 4, x: 4, y: 4)
+    }
+}
+
+struct ErrorView: View {
+    let errorMessage: String
+    let retryAction: () -> Void
+    
+    var body: some View {
+        
+        VStack(spacing: 16) {
+            
+            Text("Error: \(errorMessage)")
+                .foregroundColor(.red)
+                .multilineTextAlignment(.center)
+            
+            Button("Retry", action: retryAction)
+                .buttonStyle(.borderedProminent)
+        }
+        .padding()
     }
 }
