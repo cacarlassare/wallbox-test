@@ -9,9 +9,19 @@ import SwiftUI
 
 @main
 struct wallbox_testApp: App {
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DashboardView(viewModel: makeDashboardViewModel())
         }
+    }
+    
+    // Factory method to create the DashboardViewModel with all dependencies
+    private func makeDashboardViewModel() -> DashboardViewModel {
+        let dataSource = JSONFileEnergyReportDataSource()
+        let fetchUseCase = FetchEnergyDataUseCase(dataSource: dataSource)
+        let computeStatsUseCase = ComputeStatisticsUseCase()
+        
+        return DashboardViewModel(fetchUseCase: fetchUseCase, computeStatsUseCase: computeStatsUseCase)
     }
 }
