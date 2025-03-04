@@ -10,11 +10,6 @@ import SwiftUI
 struct DashboardView: View {
     @StateObject var viewModel: DashboardViewModel
     
-    // Define simple flexible column
-    let columns: [GridItem] = [
-        GridItem(.flexible(), spacing: 20)
-    ]
-    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -30,13 +25,15 @@ struct DashboardView: View {
                     
                 } else {
                     
-                    LazyVGrid(columns: columns, spacing: 20) {
+                    LazyVStack(alignment: .center) {
                         
                         // Live Data Widget
                         widgetCard {
-                            VStack(alignment: .leading, spacing: 8) {
+                            VStack(alignment: .center, spacing: 8) {
                                 Text("Live Data")
                                     .font(.headline)
+                                
+                                Spacer()
                                 
                                 if let liveReport = viewModel.liveReport {
                                     Text("Solar Power: \(liveReport.solarPower, specifier: "%.1f") kW")
@@ -45,43 +42,55 @@ struct DashboardView: View {
                                 } else {
                                     Text("No Live Data")
                                 }
+                                
+                                Spacer()
                             }
                         }
                         
                         // Quasars Charged Widget
                         widgetCard {
-                            VStack(alignment: .leading, spacing: 8) {
+                            VStack(alignment: .center, spacing: 8) {
                                 Text("Quasars Charged")
                                     .font(.headline)
+                                
+                                Spacer()
                                 
                                 if let stats = viewModel.energyStatistics {
                                     Text("\(stats.totalQuasarsCharged, specifier: "%.1f") kWh")
                                 } else {
                                     Text("N/A")
                                 }
+                                
+                                Spacer()
                             }
                         }
                         
                         // Quasars Discharged Widget
                         widgetCard {
-                            VStack(alignment: .leading, spacing: 8) {
+                            VStack(alignment: .center, spacing: 8) {
                                 Text("Quasars Discharged")
                                     .font(.headline)
+                                
+                                Spacer()
                                 
                                 if let stats = viewModel.energyStatistics {
                                     Text("\(stats.totalQuasarsDischarged, specifier: "%.1f") kWh")
                                 } else {
                                     Text("N/A")
                                 }
+                                
+                                Spacer()
                             }
                         }
                         
                         // Statistics Widget (navigates to the Detail screen)
                         NavigationLink(destination: ReportDetailView()) {
                             widgetCard {
-                                VStack(alignment: .leading, spacing: 8) {
+                                VStack(alignment: .center, spacing: 8) {
                                     Text("Statistics")
                                         .font(.headline)
+                                    
+                                    Spacer()
                                     
                                     if let stats = viewModel.energyStatistics {
                                         Text("Grid: \(stats.gridPercentage, specifier: "%.1f")%")
@@ -90,6 +99,8 @@ struct DashboardView: View {
                                     } else {
                                         Text("N/A")
                                     }
+                                    
+                                    Spacer()
                                 }
                             }
                         }
@@ -98,6 +109,7 @@ struct DashboardView: View {
                 }
             }
             .navigationTitle("Dashboard")
+            .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 viewModel.loadData()
             }
