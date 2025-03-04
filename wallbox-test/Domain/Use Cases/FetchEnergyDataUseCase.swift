@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class FetchEnergyDataUseCase {
+class FetchEnergyDataUseCase {
     private let dataSource: EnergyReportDataSource
     
     init(dataSource: EnergyReportDataSource) {

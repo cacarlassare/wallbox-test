@@ -23,7 +23,7 @@ final class ComputeStatisticsUseCaseTests: XCTestCase {
     
     func testComputeStatisticsWithValidData() {
         
-        // Dummy historical reports.
+        // Dummy historical reports
         let reports = [
             HistoricalReport(buildingActivePower: 100, gridActivePower: 60, pvActivePower: 30, quasarsActivePower: -10, timestamp: Date()),
             HistoricalReport(buildingActivePower: 200, gridActivePower: 120, pvActivePower: 60, quasarsActivePower: 20, timestamp: Date())

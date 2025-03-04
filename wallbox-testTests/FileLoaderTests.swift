@@ -12,7 +12,7 @@ final class FileLoaderTests: XCTestCase {
     
     func testLoadHistoricalReportJSON() throws {
         
-        // Attempt to load the historical reports from the JSON file
+        // Load the historical reports from the JSON file
         let reports: [HistoricalReport] = try FileLoader.loadJSON(filename: "historic_data.json", as: [HistoricalReport].self)
         
         // Check that the reports array has the expected number of items
@@ -37,7 +37,7 @@ final class FileLoaderTests: XCTestCase {
     
     func testLoadLiveReportJSON() throws {
         
-        // Attempt to load the live report from the JSON file
+        // Load the live report from the JSON file
         let liveReport: LiveReport = try FileLoader.loadJSON(filename: "live_data.json", as: LiveReport.self)
         
         // Check that live report fields have the same values from the JSON

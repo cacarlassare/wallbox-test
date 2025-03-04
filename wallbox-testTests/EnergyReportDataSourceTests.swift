@@ -28,7 +28,7 @@ final class EnergyReportDataSourceTests: XCTestCase {
         // Fetch historical reports asynchronously
         let reports = try await dataSource.fetchHistoricalReports()
         
-        // Assert that the fetched reports are not empty
+        // Check that the fetched reports are not empty
         XCTAssertFalse(reports.isEmpty)
     }
 
@@ -37,7 +37,7 @@ final class EnergyReportDataSourceTests: XCTestCase {
         // Fetch the live report asynchronously
         let liveReport = try await dataSource.fetchLiveReport()
         
-        // Assert that we've fetched a live report
+        // Check that we've fetched a live report
         XCTAssertNotNil(liveReport)
     }
 }
