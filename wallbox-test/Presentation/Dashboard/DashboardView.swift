@@ -86,7 +86,7 @@ struct DashboardView: View {
                         }
                         
                         // Statistics Widget (navigates to the ReportDetailView)
-                        NavigationLink(destination: ReportDetailView()) {
+                        NavigationLink(destination: ReportDetailView(viewModel: ViewModelsFactory.makeReportDetailViewModel())) {
                             widgetCard {
                                 VStack(alignment: .center, spacing: 8) {
                                     Text("Statistics")
@@ -130,24 +130,5 @@ struct DashboardView: View {
             .background(Color(.systemCyan).opacity(0.1))
             .cornerRadius(12)
             .shadow(color: Color.black.opacity(0.2), radius: 4, x: 4, y: 4)
-    }
-}
-
-struct ErrorView: View {
-    let errorMessage: String
-    let retryAction: () -> Void
-    
-    var body: some View {
-        
-        VStack(spacing: 16) {
-            
-            Text("Error: \(errorMessage)")
-                .foregroundColor(.red)
-                .multilineTextAlignment(.center)
-            
-            Button("Retry", action: retryAction)
-                .buttonStyle(.borderedProminent)
-        }
-        .padding()
     }
 }

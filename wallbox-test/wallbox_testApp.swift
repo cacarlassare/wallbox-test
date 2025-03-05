@@ -12,16 +12,7 @@ struct wallbox_testApp: App {
     
     var body: some Scene {
         WindowGroup {
-            DashboardView(viewModel: makeDashboardViewModel())
+            DashboardView(viewModel: ViewModelsFactory.makeDashboardViewModel())
         }
-    }
-    
-    // Factory method to create the DashboardViewModel with all dependencies
-    private func makeDashboardViewModel() -> DashboardViewModel {
-        let dataSource = JSONFileEnergyReportDataSource()
-        let fetchUseCase = FetchEnergyDataUseCase(dataSource: dataSource)
-        let computeStatsUseCase = ComputeStatisticsUseCase()
-        
-        return DashboardViewModel(fetchUseCase: fetchUseCase, computeStatsUseCase: computeStatsUseCase)
     }
 }
